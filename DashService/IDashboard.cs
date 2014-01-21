@@ -31,7 +31,18 @@ namespace DashService
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/ar")]
-        [return: MessageParameter(Name = "clima")]
-        string ArSvc();
+        [return: MessageParameter(Name = "condicao")]
+        string ArSvc();       
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/sptrans")]
+        [return: MessageParameter(Name = "transporte")]
+        List<ClHtml.resultadoTransporte> SptransSvc();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/metro")]
+        [return: MessageParameter(Name = "transporte")]
+        List<ClHtml.resultadoTransporte> MetroSvc();
+
     }
 }

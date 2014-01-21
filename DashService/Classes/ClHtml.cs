@@ -40,7 +40,11 @@ namespace DashService.Classes
             public int chuva { get; set; }
             public int mm { get; set; }
             public int umidade { get; set; }            
+        }
 
+        public class resultadoTransporte
+        {
+            public string ocorrencia { get; set; }            
         }
     }
 }

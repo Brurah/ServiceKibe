@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -17,6 +18,17 @@ namespace DashService.Classes
             using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
             {
                 using (var stream = new StreamReader(webResponse.GetResponseStream()))
+                    return stream.ReadToEnd();
+            }
+        }
+
+        public string getPageISO(string url)
+        {
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
+            {
+                using (var stream = new StreamReader(webResponse.GetResponseStream(), Encoding.GetEncoding("ISO-8859-1")))
                     return stream.ReadToEnd();
             }
         }
@@ -65,6 +77,42 @@ namespace DashService.Classes
             }
 
             return resultado;
+        }
+
+        public List<ClHtml.ResultadoHtml> filtroHtml(string reg, string url)
+        {
+            string[] HtmlResp;
+            List<ClHtml.ResultadoHtml> RespList = new List<ClHtml.ResultadoHtml>();
+            
+            Metodos mt = new Metodos();
+            HtmlResp = mt.getPage(url).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            foreach (string s in HtmlResp)
+            {
+                RespList.Add(new ClHtml.ResultadoHtml() { resultado = s });
+            }
+
+            Regex filtro = new Regex(reg);
+
+            return RespList = RespList.Where(a => filtro.IsMatch(a.resultado)).ToList();
+        }
+
+        public List<ClHtml.ResultadoHtml> filtroHtmlISO(string reg, string url)
+        {
+            string[] HtmlResp;
+            List<ClHtml.ResultadoHtml> RespList = new List<ClHtml.ResultadoHtml>();
+
+            Metodos mt = new Metodos();
+            HtmlResp = mt.getPageISO(url).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            foreach (string s in HtmlResp)
+            {
+                RespList.Add(new ClHtml.ResultadoHtml() { resultado = s });
+            }
+
+            Regex filtro = new Regex(reg);
+
+            return RespList = RespList.Where(a => filtro.IsMatch(a.resultado)).ToList();
         }
     }
 }

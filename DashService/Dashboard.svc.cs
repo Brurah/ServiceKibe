@@ -23,22 +23,11 @@ namespace DashService
     {
         public ClHtml.resultadoTransito TransitoSvc()
         {
-            string[] HtmlResp;
-            List<ClHtml.ResultadoHtml> RespList = new List<ClHtml.ResultadoHtml>();
-
+            Metodos mt = new Metodos();
+            string filtro = "(<div id=\")((CentroLentidao)|(LesteLentidao)|(NorteLentidao)|(OesteLentidao)|(SulLentidao))(\")(.*?)(</div>)";
             string url = "http://cetsp1.cetsp.com.br/monitransmapa/agora/";
 
-            Metodos mt = new Metodos();
-            HtmlResp = mt.getPage(url).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-
-            foreach (string s in HtmlResp)
-            {
-                RespList.Add(new ClHtml.ResultadoHtml() { resultado = s });
-            }
-
-            Regex filtro = new Regex("(<div id=\")((CentroLentidao)|(LesteLentidao)|(NorteLentidao)|(OesteLentidao)|(SulLentidao))(\")(.*?)(</div>)");
-
-            RespList = RespList.Where(a => filtro.IsMatch(a.resultado)).ToList();
+            List<ClHtml.ResultadoHtml> RespList = mt.filtroHtml(filtro, url);
 
             ClHtml.resultadoTransito Transito = new ClHtml.resultadoTransito();
 
@@ -235,6 +224,40 @@ namespace DashService
             return ar;
 
         }
+
+        public List<ClHtml.resultadoTransporte> SptransSvc()
+        {
+            List<ClHtml.resultadoTransporte> rst = new List<ClHtml.resultadoTransporte>();
+            Metodos mt = new Metodos();
+            string filtro = "(<li><a href=\"noticias)(.*?)(</strong>)";
+            string url = "http://www.sptrans.com.br/";
+
+            List<ClHtml.ResultadoHtml> RespList = mt.filtroHtmlISO(filtro, url);
+            foreach (ClHtml.ResultadoHtml item in RespList)
+            {
+                rst.Add(new ClHtml.resultadoTransporte() { ocorrencia = Regex.Replace(item.resultado, "(^(.*?)(ng> - ))|((</a>)(.*?)$)", "") });
+            }
+
+            return rst;
+        }
+
+        public List<ClHtml.resultadoTransporte> MetroSvc()
+        {
+            List<ClHtml.resultadoTransporte> rst = new List<ClHtml.resultadoTransporte>();
+            Metodos mt = new Metodos();
+            string filtro = "(<li><a href=\"noticias)(.*?)(</strong>)";
+            string url = "http://www.metro.sp.gov.br/servicos/ocorrencias/teocorrencias.asp";
+
+            List<ClHtml.ResultadoHtml> RespList = mt.filtroHtmlISO(filtro, url);
+            foreach (ClHtml.ResultadoHtml item in RespList)
+            {
+                rst.Add(new ClHtml.resultadoTransporte() { ocorrencia = Regex.Replace(item.resultado, "(^(.*?)(ng> - ))|((</a>)(.*?)$)", "") });
+            }
+
+            return rst;
+        }
+
+
     }   
 
 }
