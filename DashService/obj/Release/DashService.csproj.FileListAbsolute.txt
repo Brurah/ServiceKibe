@@ -1,0 +1,4 @@
+C:\Projetos\Service\DashService\DashService\bin\DashService.dll
+C:\Projetos\Service\DashService\DashService\bin\DashService.pdb
+C:\Projetos\Service\DashService\DashService\obj\Release\DashService.dll
+C:\Projetos\Service\DashService\DashService\obj\Release\DashService.pdb

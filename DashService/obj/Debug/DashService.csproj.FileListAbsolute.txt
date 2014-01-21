@@ -1,0 +1,5 @@
+C:\Projetos\Service\DashService\DashService\bin\DashService.dll
+C:\Projetos\Service\DashService\DashService\bin\DashService.pdb
+C:\Projetos\Service\DashService\DashService\obj\Debug\DashService.dll
+C:\Projetos\Service\DashService\DashService\obj\Debug\DashService.pdb
+C:\Projetos\Service\DashService\DashService\obj\Debug\DashService.csprojResolveAssemblyReference.cache

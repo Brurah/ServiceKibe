@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>\\192.168.201.35\c$\WEB4\ServiceDashboard</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/DashService.dll">
+      <publishTime>01/20/2014 18:17:45</publishTime>
+    </File>
+    <File Include="Dashboard.svc">
+      <publishTime>01/17/2014 11:55:48</publishTime>
+    </File>
+    <File Include="Service1.svc">
+      <publishTime>01/17/2014 11:54:40</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/17/2014 17:28:56</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
